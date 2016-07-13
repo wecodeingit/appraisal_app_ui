@@ -1,9 +1,38 @@
-<div ng-controller="SummaryCtrl as vm">
-<md-card>
- <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">{{vm.title}}</span>
-          </md-card-title-text>
-        </md-card-title>
-</md-card>
+<div class="md-padding" ng-controller="SummaryCtrl as vm">
+    <md-toolbar class="site-content-toolbar">
+        <h2 class="md-toolbar-item md-breadcrumb md-headline">
+      <span class="md-padding">{{vm.title}}</span>
+    </h2>
+    </md-toolbar>
+    <md-divider></md-divider>
+    <md-content>
+        <md-tabs class="nestedList" md-selected="vm.selectedIndex" md-border-bottom md-autoselect>
+            <md-tab ng-repeat="tab in vm.tabs" label="{{tab.title}}" md-on-select="vm.onTabSelected(tab)">
+                <div>
+                    <div ng-class="{'hide':vm.isDrilldownView}" ng-if="!vm.isDrilldownView">
+                        <md-list>
+                            <md-list-item ng-cloak ng-repeat="employee in tab.list" ng-click="vm.addTab(employee)" class="md-3-line">
+                                <img ng-src="../src/assets/img/ic_account_circle_black_48px.svg" class="md-avatar" alt="{{employee.name}} " />
+                                <div class="md-list-item-text " layout="column">
+                                    <h3>{{ employee.employeeID }}</h3>
+                                    <h4>{{ employee.name }}</h4>
+                                    <p>{{ employee.overallScore }}</p>
+                                </div>
+                                <md-button class="md-primary md-raised">&gt;</md-button>
+                                <md-divider></md-divider>
+                            </md-list-item>
+                        </md-list>
+                    </div>
+                    <div class="hide" ng-class="{'show':vm.isDrilldownView}" ng-if="vm.isDrilldownView">
+                        <div class="md-list-item-text " layout="column">
+                            <h3>ID: {{ tab.list.employeeID}}</h3>
+                            <h3>Name: {{ tab.list.name }}</h4>
+                            <h3>Overall Score :{{ tab.list.overallScore }}</h3>
+                        </div>
+                        <md-button ng-click="vm.removeTab(tab)" class="md-primary md-raised">&lt; BACK</md-button>
+                    </div>
+                </div>
+            </md-tab>
+        </md-tabs>
+    </md-content>
 </div>
