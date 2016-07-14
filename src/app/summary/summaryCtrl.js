@@ -4,10 +4,12 @@
         .module('appraisalApp')
         .controller('SummaryCtrl', Summary);
 
-    function Summary() {
-        /*jshint validthis: true */
+    Summary.$inject = ['$timeout', '$scope'];
 
-        var employeeList = [{
+    function Summary($timeout, $scope) {
+        /*jshint validthis: true */
+        var vm = this;
+        vm.employeeList = [{
             "employeeID": "1",
             "name": "Thomas",
             "overallScore": 80
@@ -17,24 +19,51 @@
             "overallScore": 80
         }];
 
-        var vm = this;
+
+
         vm.title = "View Summary";
-        var tabs = [{
-            list: employeeList
-        }];
-        vm.tabs = tabs;
-        vm.selectedIndex = 0;
-        vm.onTabSelected = function(tab) {
-            vm.isDrilldownView = vm.tabs.length <= 1 ? false : true;
+
+
+        vm.nextView = function(employee) {
+            vm.isDrilldownView = true;
+            employee.individualScore = [{
+                "name": "Goal Score",
+                "value": "100"
+            }, {
+                "name": "Performance",
+                "value": "100"
+            }, {
+                "name": "Attendance",
+                "value": "100"
+            }, {
+                "name": "Skill set",
+                "value": "100"
+            }];
+            vm.employee = employee;
         };
-        vm.addTab = function(employee) {
-            tabs.push({
-                list: employee
-            });
+        vm.isDrilldownView = false;
+        vm.isOpen = false;
+        $scope.$watch('vm.isDrilldownView', function(isOpen) {
+            if (isOpen) {
+                vm.isOpen = true;
+                $timeout(function() {
+                    vm.tooltipVisible = vm.isDrilldownView;
+                }, 600);
+            } else {
+                vm.tooltipVisible = vm.isDrilldownView;
+            }
+        });
+
+        vm.stopEvent = function($event) {
+            $event.stopPropagation();
+            // Some code to find and display the next image
         };
-        vm.removeTab = function(tab) {
-            var index = tabs.indexOf(tab);
-            tabs.splice(index, 1);
+
+
+        vm.prevView = function() {
+            vm.isDrilldownView = false;
+
+
         };
         return vm;
     }

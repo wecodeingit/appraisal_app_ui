@@ -6,33 +6,52 @@
     </md-toolbar>
     <md-divider></md-divider>
     <md-content>
-        <md-tabs class="nestedList" md-selected="vm.selectedIndex" md-border-bottom md-autoselect>
-            <md-tab ng-repeat="tab in vm.tabs" label="{{tab.title}}" md-on-select="vm.onTabSelected(tab)">
-                <div>
-                    <div ng-class="{'hide':vm.isDrilldownView}" ng-if="!vm.isDrilldownView">
-                        <md-list>
-                            <md-list-item ng-cloak ng-repeat="employee in tab.list" ng-click="vm.addTab(employee)" class="md-3-line">
-                                <img ng-src="../src/assets/img/ic_account_circle_black_48px.svg" class="md-avatar" alt="{{employee.name}} " />
-                                <div class="md-list-item-text " layout="column">
-                                    <h3>{{ employee.employeeID }}</h3>
-                                    <h4>{{ employee.name }}</h4>
-                                    <p>{{ employee.overallScore }}</p>
-                                </div>
-                                <md-button class="md-primary md-raised">&gt;</md-button>
-                                <md-divider></md-divider>
-                            </md-list-item>
-                        </md-list>
+        <div ng-class="{'hide':vm.isDrilldownView}" ng-if="!vm.isDrilldownView">
+            <md-list>
+                <md-list-item ng-click="vm.nextView(employee)" ng-repeat="employee in vm.employeeList
+" class="md-3-line">
+                    <img ng-src="../src/assets/img/ic_account_circle_black_48px.svg" class="md-avatar" alt="{{employee.name}} " />
+                    <div class="md-list-item-text " layout="column">
+                        <h3>{{ employee.employeeID }}</h3>
+                        <h4>{{ employee.name }}</h4>
+                        <p>{{ employee.overallScore }}</p>
                     </div>
-                    <div class="hide" ng-class="{'show':vm.isDrilldownView}" ng-if="vm.isDrilldownView">
-                        <div class="md-list-item-text " layout="column">
-                            <h3>ID: {{ tab.list.employeeID}}</h3>
-                            <h3>Name: {{ tab.list.name }}</h4>
-                            <h3>Overall Score :{{ tab.list.overallScore }}</h3>
-                        </div>
-                        <md-button ng-click="vm.removeTab(tab)" class="md-primary md-raised">&lt; BACK</md-button>
-                    </div>
+                    <md-button class="md-primary md-raised">&gt;</md-button>
+                    <md-divider></md-divider>
+                </md-list-item>
+            </md-list>
+        </div>
+        <div class="hide drilldownView" ng-class="{'show':vm.isDrilldownView}" ng-if="vm.isDrilldownView">
+            <div layout="row" layout-align="center center">
+                <div flex="30" layout="column">
+                    <md-whiteframe class="md-whiteframe-1dp md-padding" layout="column" layout-align="center">
+                        <h5 flex>ID: {{ vm.employee.employeeID}}</h5>
+                        <h5 flex>Name: {{ vm.employee.name }}</h5>
+                        <h5 flex>Overall Score :{{ vm.employee.overallScore }}</h5>
+                    </md-whiteframe>
                 </div>
-            </md-tab>
-        </md-tabs>
+                <div flex="50">
+                    <md-fab-speed-dial md-open="vm.isOpen" md-direction="down" class="md-scale">
+                        <md-fab-trigger>
+                            <md-button aria-label="menu" class="md-fab md-primary">
+                                {{vm.employee.overallScore}}
+                            </md-button>
+                        </md-fab-trigger>
+                        <md-fab-actions>
+                            <div ng-repeat="score in vm.employee.individualScore">
+                                <md-button aria-label="score.name" class="md-fab  md-raised md-mini">
+                                    <md-tooltip md-direction="left" md-autohide="false" md-visible="vm.tooltipVisible">{{score.name}}</md-tooltip>
+                                    {{score.value}}
+                                    <md-tooltip md-direction="right" md-autohide="false" md-visible="vm.tooltipVisible">%</md-tooltip>
+                                </md-button>
+                                </md-button>
+                            </div>
+                        </md-fab-actions>
+                    </md-fab-speed-dial>
+                </div>
+            </div>
+            <div layout="row" layout-align="center" flex>
+                <md-button ng-click="vm.prevView()" class="md-primary md-raised">&lt; BACK</md-button>
+            </div>
     </md-content>
-</div>
+    </div>
