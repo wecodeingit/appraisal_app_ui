@@ -5,53 +5,60 @@
     </h2>
     </md-toolbar>
     <md-divider></md-divider>
-    <md-content>
-        <div ng-class="{'hide':vm.isDrilldownView}" ng-if="!vm.isDrilldownView">
-            <md-list>
-                <md-list-item ng-click="vm.nextView(employee)" ng-repeat="employee in vm.employeeList
-" class="md-3-line">
-                    <img ng-src="../src/assets/img/ic_account_circle_black_48px.svg" class="md-avatar" alt="{{employee.name}} " />
-                    <div class="md-list-item-text " layout="column">
-                        <h3>{{ employee.employeeID }}</h3>
-                        <h4>{{ employee.name }}</h4>
-                        <p>{{ employee.overallScore }}</p>
-                    </div>
-                    <md-button class="md-primary md-raised">&gt;</md-button>
-                    <md-divider></md-divider>
-                </md-list-item>
-            </md-list>
+    <md-content class="md-tabs">
+        <div ng-class="vm.isDrilldownView?'md-left':'md-active'" class="md-tab-content dynamic-height">
+            <div ng-class="{'md-left':vm.isDrilldownView}" ng-if="!vm.isDrilldownView">
+                <md-list>
+                    <md-list-item ng-click="vm.nextView(employee)" ng-repeat="employee in vm.employeeList"
+                     class="md-3-line">
+                        <img ng-src="../src/assets/img/ic_account_circle_black_48px.svg" class="md-avatar" alt="{{employee.name}} " />
+                        <div class="md-list-item-text " layout="column">
+                            <h3>{{ employee.employeeID }}</h3>
+                            <h4>{{ employee.name }}</h4>
+                            <p>{{ employee.overallScore }}</p>
+                        </div>
+                        <md-button class="md-primary md-raised">&gt;</md-button>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                </md-list>
+            </div>
         </div>
-        <div class="hide drilldownView" ng-class="{'show':vm.isDrilldownView}" ng-if="vm.isDrilldownView">
-            <div layout="row" layout-align="center center">
-                <div flex="30" layout="column">
-                    <md-whiteframe class="md-whiteframe-1dp md-padding" layout="column" layout-align="center">
-                        <h5 flex>ID: {{ vm.employee.employeeID}}</h5>
-                        <h5 flex>Name: {{ vm.employee.name }}</h5>
-                        <h5 flex>Overall Score :{{ vm.employee.overallScore }}</h5>
-                    </md-whiteframe>
-                </div>
-                <div flex="50">
-                    <md-fab-speed-dial md-open="vm.isOpen" md-direction="down" class="md-scale">
-                        <md-fab-trigger>
-                            <md-button aria-label="menu" class="md-fab md-primary">
+        <div ng-class="vm.isDrilldownView?'md-active':'md-right'" class="md-tab-content dynamic-height">
+            <div class="drilldownView" ng-if="vm.isDrilldownView">
+                <md-whiteframe class="md-whiteframe-1dp md-padding" layout="row" layout-align="space-between center">
+                    <h5>ID: <md-button class="md-fab md-primary">{{ vm.employee.employeeID}}</md-button></h5>
+                    <h2 class="left-spacing">{{ vm.employee.name }}</h2>
+                    <h5>Overall Score :<md-button class="md-fab md-primary">{{ vm.employee.overallScore }}</md-button></h5>
+                </md-whiteframe>
+                <div class="timeline-view top-spacing lock-size layout-align-center-center layout-row" layout="row" layout-align="center center">
+                    <div class="md-fab-speed-dial md-down md-scale" ng-class="{'isOpen':vm.actionVisible}">
+                        <div class="md-fab-trigger">
+                            <button class="md-fab md-primary md-button md-ink-ripple" type="button" aria-label="menu">
                                 {{vm.employee.overallScore}}
-                            </md-button>
-                        </md-fab-trigger>
-                        <md-fab-actions>
-                            <div ng-repeat="score in vm.employee.individualScore">
-                                <md-button aria-label="score.name" class="md-fab  md-raised md-mini">
-                                    <md-tooltip md-direction="left" md-autohide="false" md-visible="vm.tooltipVisible">{{score.name}}</md-tooltip>
-                                    {{score.value}}
-                                    <md-tooltip md-direction="right" md-autohide="false" md-visible="vm.tooltipVisible">%</md-tooltip>
-                                </md-button>
-                                </md-button>
+                            </button>
+                        </div>
+                        <div class="md-fab-actions">
+                            <div class="md-fab-action-item" ng-repeat="score in vm.employee.scores">
+                                <button class="md-fab md-raised md-mini md-button md-ink-ripple" type="button" aria-label="Twitter"> {{score.value}}
+                                </button>
+                                <div ng-if="vm.tooltipVisible" class="md-tooltip dir-right" ng-class="{'_md-show':vm.tooltipVisible}" role="tooltip">
+                                    <div class="_md-content _md-show">
+                                        <span>{{score.name}}</span>
+                                    </div>
+                                </div>
+                                <div ng-if="vm.tooltipVisible" class="md-tooltip dir-left" ng-class="{'_md-show':vm.tooltipVisible}" role="tooltip">
+                                    <div class="_md-content _md-show">
+                                        <span>%</span>
+                                    </div>
+                                </div>
                             </div>
-                        </md-fab-actions>
-                    </md-fab-speed-dial>
+                        </div>
+                    </div>
+                </div>
+                <div layout="row" layout-align="center" flex>
+                    <md-button ng-click="vm.prevView()" class="top-spacing md-primary md-raised">&lt; BACK</md-button>
                 </div>
             </div>
-            <div layout="row" layout-align="center" flex>
-                <md-button ng-click="vm.prevView()" class="md-primary md-raised">&lt; BACK</md-button>
-            </div>
+        </div>
     </md-content>
-    </div>
+</div>

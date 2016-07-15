@@ -1,15 +1,13 @@
 <div layout="row" layout-fill ng-controller="HomeCtrl as vm">
 <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
     <div>
-        <md-toolbar class="md-tall md-hue-2">
-            <div layout="column" class="md-toolbar-tools-bottom inset">
-                <div layout="row">
-                    <div flex="80" style="margin-top: 10px;">
-                        <div><md-icon md-svg-src = '../src/assets/img/ic_euro_symbol_white_24px.svg'></md-icon></div>
+            <md-toolbar class="md-tall md-hue-2">
+                <div layout="column" class="md-toolbar-tools-bottom inset">
+                    <div layout="row" layout-align="center" class="header-logo-top-spacing">
+                        <md-icon md-svg-src='../src/assets/img/ic_euro_symbol_white_24px.svg'></md-icon>
                     </div>
                 </div>
-            </div>
-        </md-toolbar>
+            </md-toolbar>
        <md-list class="navTab">
         <md-list-item ui-sref="home.configuration" ng-class="{'active':vm.isSelected('home.configuration')}"  >
   <p > Configuration</p>
