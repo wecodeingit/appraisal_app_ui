@@ -1,8 +1,9 @@
-.header-logo-top-spacing {
-    margin-top: 10px;
+.header-logo {
+    width: 42px;
+    height: 42px;
 }
 
-.navTab md-list-item.active {
+.navTab .active {
     background: #3f51b5;
     color: #fff;
 }
