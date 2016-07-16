@@ -1,3 +1,9 @@
+.header-logo-bar {
+    height: 64px !important;
+    max-height: 64px !important;
+    min-height: 64px !important;
+}
+
 .header-logo {
     width: 42px;
     height: 42px;
@@ -139,4 +145,26 @@
 
 .top-spacing {
     margin-top: 50px;
+}
+
+.autocomplete-template li {
+    border-bottom: 1px solid #ccc;
+    height: auto;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    white-space: normal;
+}
+
+.autocomplete-template li:last-child {
+    border-bottom-width: 0;
+}
+
+.autocomplete-template .item-title,
+.autocomplete-template .item-metadata {
+    display: block;
+    line-height: 2;
+}
+
+.left {
+    float: left !important;
 }
