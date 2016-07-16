@@ -23,6 +23,10 @@
     color: #202020 !important;
 }
 
+.site-content-toolbar .md-button.md-primary {
+    background: #3f51b5 !important;
+}
+
 .md-tabs {
     overflow: visible;
 }
@@ -147,6 +151,10 @@
     margin-top: 50px;
 }
 
+.top-spacing-md {
+    margin-top: 30px;
+}
+
 .autocomplete-template li {
     border-bottom: 1px solid #ccc;
     height: auto;
@@ -167,4 +175,8 @@
 
 .left {
     float: left !important;
+}
+
+.overallScoreDisplayArea {
+    text-align: center;
 }

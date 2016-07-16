@@ -25,6 +25,15 @@
             { "id": 5, "measureName": "Performance Objective Score", "weightage": 20 }
         ];
         vm.scoreData = [];
+        vm.enterScore = false;
+        vm.selectedItemChange = function(item) {
+            if (item) {
+                vm.enterScore = true;
+            } else {
+                vm.enterScore = false;
+            }
+        };
+
         vm.querySearch = function(query) {
             return query ? vm.employeeData.filter(createFilterFor(query)) : vm.employeeData;
         };
@@ -34,6 +43,7 @@
         vm.openBottomSheet = function() {
             vm.overallScore = 90;
             $mdBottomSheet.show({
+                parent: '#application-content',
                 locals: { score: vm.overallScore },
                 controller: 'overallScoreCtrl',
                 controllerAs: 'vm',

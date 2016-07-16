@@ -1,4 +1,9 @@
 <md-bottom-sheet>
-    <md-progress-circular md-mode="determinate" value="{{vm.overallScore}}"></md-progress-circular>
-    {{vm.overallScore}}
+    <div layout="row" class="overallScoreDisplayArea" layout-align="center center">
+        <div>
+            <h4>Overall Score<div >{{vm.overallScore}}</div></h4>
+        </div>
+        <md-progress-circular md-mode="determinate" value="{{vm.overallScore}}" flex-offset="5">
+        </md-progress-circular>
+    </div>
 </md-bottom-sheet>
