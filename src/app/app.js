@@ -1,14 +1,14 @@
 (function() {
-	'use strict';
+    'use strict';
 
-	angular.module('appraisalApp', [
-		'ngAria',
-		'ui.bootstrap',
-		'ngMaterial',
-		'ngMdIcons',
-		'ngAnimate',
-		'ngSanitize',
-		'ui.router'
-	]);
+    var modules = ['ngAria', 'ngAnimate', 'ngMaterial', 'ui.router', 'templates'].filter(function(module) {
+        try {
+            return !!angular.module(module);
+        } catch (e) {}
+    });
+
+    angular.module('appraisal', modules);
+
+
 
 })();

@@ -7,6 +7,8 @@
 .header-logo {
     width: 42px;
     height: 42px;
+    background: url("../img/ic_monetization_on_white_48px.svg");
+    background-size: cover;
 }
 
 .navTab .active {
@@ -52,6 +54,11 @@
     transform: translateX(100%);
     animation: 1s md-tab-content-hide;
     opacity: 0;
+}
+
+.employee-avatar {
+    background: url('../img/ic_account_circle_black_48px.svg');
+    background-size: cover;
 }
 
 .md-fab-speed-dial {

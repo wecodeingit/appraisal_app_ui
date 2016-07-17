@@ -15,7 +15,7 @@
             <div ng-class="{'md-left':vm.isDrilldownView}" ng-if="!vm.isDrilldownView">
                 <md-list>
                     <md-list-item ng-click="vm.nextView(employee)" ng-repeat="employee in vm.employeeList" class="md-3-line">
-                        <img ng-src="../src/assets/img/ic_account_circle_black_48px.svg" class="md-avatar" alt="{{employee.name}} " />
+                        <span class="md-avatar employee-avatar" /></span>
                         <div class="md-list-item-text " layout="column">
                             <h3>{{ employee.employeeID }}</h3>
                             <h4>{{ employee.name }}</h4>

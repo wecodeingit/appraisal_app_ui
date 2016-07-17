@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('appraisalApp')
+        .module('appraisal')
         .controller('SummaryCtrl', Summary);
 
     Summary.$inject = ['$timeout', '$scope'];
@@ -46,7 +46,7 @@
 
                 $timeout(function() {
                     vm.actionVisible = vm.isDrilldownView;
-                }, 500);
+                }, 0);
                 $timeout(function() {
 
                     vm.tooltipVisible = vm.isDrilldownView;

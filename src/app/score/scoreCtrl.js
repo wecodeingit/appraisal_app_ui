@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('appraisalApp')
+        .module('appraisal')
         .controller('ScoreCtrl', Score);
 
     Score.$inject = ['$scope', '$mdBottomSheet'];

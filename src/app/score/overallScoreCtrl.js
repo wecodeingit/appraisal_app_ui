@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('appraisalApp')
+        .module('appraisal')
         .controller('overallScoreCtrl', OverallScore);
     OverallScore.$inject = ['$scope', 'score'];
 

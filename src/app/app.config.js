@@ -1,30 +1,24 @@
-(function () {
-	'use strict';
+(function() {
+    'use strict';
 
 
-	angular
-		.module('appraisalApp')
-		.config(configure)
-		.run(runBlock);
+    angular
+        .module('appraisal')
+        .config(configure);
 
-	configure.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
+    configure.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
 
-	function configure($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    function configure($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 
-		$locationProvider.hashPrefix('!');
+        $locationProvider.hashPrefix('!');
 
-		// This is required for Browser Sync to work poperly
-		$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        // This is required for Browser Sync to work poperly
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
-	}
+    }
 
-	runBlock.$inject = ['$rootScope'];
 
-	function runBlock($rootScope) {
-
-		console.log('AngularJS run() function...');
-	}
 
 
 })();
